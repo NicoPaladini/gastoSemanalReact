@@ -7,8 +7,12 @@ class ControlPresupuesto extends Component{
     render(){
         return(
             <React.Fragment>
-                <Presupuesto />
-                <Restante />
+                <Presupuesto
+                    presupuesto={this.props.presupuesto}
+                />
+                <Restante 
+                    restante={this.props.restante}
+                />
             </React.Fragment>
         )
     }

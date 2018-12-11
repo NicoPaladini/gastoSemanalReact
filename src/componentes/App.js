@@ -51,15 +51,29 @@ class App extends Component {
   //Se conoce como "timestamp"
   gastos[`gastos${Date.now()}`] = gasto;
 
-  console.log(gastos);
+  //Restar el presupuesto
+  this.restarPresupuesto(gasto.cantidadGasto);
 
   //Ponerlo en el state
   this.setState({
     gastos: gastos
   })
-
-
 }
+
+//Restar del presupuesto cuando un gasto se crea
+
+restarPresupuesto = cantidad => {
+  //Leer el gasto. Como va a llegar un valor en formato string hay que convertirlo a numero
+let restar = Number(cantidad);
+//Tomamos una copia del state actual
+let restante = this.state.restante
+//Lo restamos
+restante -= restar
+//Agregamos un nuevo state
+this.setState({restante})
+}
+
+
 
   render() {
     return (
@@ -79,7 +93,10 @@ class App extends Component {
               <Listado
                 gastos={this.state.gastos}
               />
-              <ControlPresupuesto />
+              <ControlPresupuesto
+                presupuesto={this.state.presupuesto}
+                restante={this.state.restante}
+              />
             </div>
           </div>
         </div>
